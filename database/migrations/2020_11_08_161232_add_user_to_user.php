@@ -15,28 +15,11 @@ class AddUserToUser extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('username')->after('id');
-	        $table->boolean('is_admin')->after('password');
+            $table->string('role_type_id', 20)->after('password');
+            $table->string('user_id', 20)->after('remember_token');
+            $table->foreign('role_type_id')->references('role_type_id')->on('type_roles')->onDelete('cascade');
+            $table->foreign('user_id')->references('user_id')->on('inf_users')->onDelete('cascade');
         });
-
-        DB::table('type_bill_statuses')->insert(
-            [
-                [
-                    'bill_status_id' => 'BS001',
-                    'name_bill_status' => 'Unpaid bill'
-                ],
-
-                [
-                    'bill_status_id' => 'BS002',
-                    'name_bill_status' => 'Paid'
-                ],
-
-                [
-                    'bill_status_id' => 'BS003',
-                    'name_bill_status' => 'In the midst of verification. '
-                ]
-
-            ]
-        );
     }
 
     /**
