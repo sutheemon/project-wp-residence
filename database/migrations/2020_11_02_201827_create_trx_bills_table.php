@@ -28,6 +28,7 @@ class CreateTrxBillsTable extends Migration
             $table->foreign('unit_price_water_id')->references('unit_price_id')->on('type_unit_prices')->onDelete('cascade');
             $table->foreign('unit_price_electric_id')->references('unit_price_id')->on('type_unit_prices')->onDelete('cascade');
         });
+
     }
 
     /**
