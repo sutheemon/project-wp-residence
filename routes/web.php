@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+<<<<<<< HEAD
 Route::apiResource('home', 'App\Http\Controllers\HomeController');
 Route::apiResource('residence', 'App\Http\Controllers\ResidenceController');
 Route::apiResource('bill', 'App\Http\Controllers\BillController');
@@ -20,4 +21,12 @@ Route::apiResource('profile', 'App\Http\Controllers\ProfileController');
 Route::get('/',function(){
     return view('welcome');
 });
+=======
+Route::get('/', function () {
+    return view('welcome');
+});
 
+Auth::routes();
+>>>>>>> master
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
