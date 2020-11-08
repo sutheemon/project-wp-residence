@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTypeUnitPricesTable extends Migration
+class CreatePasswordResetsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateTypeUnitPricesTable extends Migration
      */
     public function up()
     {
-        Schema::create('type_unit_prices', function (Blueprint $table) {
-            $table->string('unit_price_id', 20)->primary();
-            $table->string('name_price', 100);
-            $table->integer('value_unit');
+        Schema::create('password_resets', function (Blueprint $table) {
+            $table->string('email')->index();
+            $table->string('token');
+            $table->timestamp('created_at')->nullable();
         });
     }
 
@@ -27,6 +27,6 @@ class CreateTypeUnitPricesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('type_unit_prices');
+        Schema::dropIfExists('password_resets');
     }
 }
