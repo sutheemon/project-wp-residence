@@ -17,6 +17,26 @@ class AddUserToUser extends Migration
             $table->string('username')->after('id');
 	        $table->boolean('is_admin')->after('password');
         });
+
+        DB::table('type_bill_statuses')->insert(
+            [
+                [
+                    'bill_status_id' => 'BS001',
+                    'name_bill_status' => 'Unpaid bill'
+                ],
+
+                [
+                    'bill_status_id' => 'BS002',
+                    'name_bill_status' => 'Paid'
+                ],
+
+                [
+                    'bill_status_id' => 'BS003',
+                    'name_bill_status' => 'In the midst of verification. '
+                ]
+
+            ]
+        );
     }
 
     /**
