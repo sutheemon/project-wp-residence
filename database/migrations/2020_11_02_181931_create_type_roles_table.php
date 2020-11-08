@@ -17,6 +17,20 @@ class CreateTypeRolesTable extends Migration
             $table->string('role_type_id', 20)->primary();
             $table->string('name_role', 100);
         });
+
+        DB::table('type_roles')->insert(
+            [
+                [
+                    'role_type_id' => 'A',
+                    'name_role' => 'admin'
+                ],
+
+                [
+                    'role_type_id' => 'U',
+                    'name_role' => 'user'
+                ],
+            ]
+            );
     }
 
     /**

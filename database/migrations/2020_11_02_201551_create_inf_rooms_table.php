@@ -23,6 +23,29 @@ class CreateInfRoomsTable extends Migration
             $table->foreign('room_status_id')->references('room_status_id')->on('type_room_statuses')->onDelete('cascade');
 
         });
+
+        DB::table('inf_rooms')->insert(
+            [
+                [
+                    'room_id'    => 'A101',
+                    'room_build'     => 'A',
+                    'room_floor'  => '1',
+                    'room_type_id'   => 'RT001',
+                    'room_status_id' => 'RS001'
+                ],
+
+                [
+                    'room_id'    => 'A102',
+                    'room_build'     => 'A',
+                    'room_floor'  => '1',
+                    'room_type_id'   => 'RT001',
+                    'room_status_id' => 'RS002'
+                ]
+            ]
+        );
+        
+       
+    
     }
 
     /**

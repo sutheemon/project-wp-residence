@@ -17,6 +17,26 @@ class CreateTypeBillStatusesTable extends Migration
             $table->string('bill_status_id', 20)->primary();
             $table->string('name_bill_status', 100);
         });
+
+        DB::table('type_bill_statuses')->insert(
+            [
+                [
+                    'bill_status_id' => 'BS001',
+                    'name_bill_status' => 'Unpaid bill'
+                ],
+
+                [
+                    'bill_status_id' => 'BS002',
+                    'name_bill_status' => 'Paid'
+                ],
+
+                [
+                    'bill_status_id' => 'BS003',
+                    'name_bill_status' => 'In the midst of verification. '
+                ]
+
+            ]
+        );
     }
 
     /**

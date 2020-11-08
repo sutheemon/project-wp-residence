@@ -17,5 +17,7 @@ Route::apiResource('home', 'App\Http\Controllers\HomeController');
 Route::apiResource('residence', 'App\Http\Controllers\ResidenceController');
 Route::apiResource('bill', 'App\Http\Controllers\BillController');
 Route::apiResource('profile', 'App\Http\Controllers\ProfileController');
-
+Route::get('/',function(){
+    return view('welcome');
+});
 

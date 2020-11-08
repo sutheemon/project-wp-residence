@@ -19,6 +19,15 @@ class CreateTypeRoomsTable extends Migration
             $table->string('desc_room', 200);
             $table->integer('price_room');
         });
+
+        DB::table('type_rooms')->insert(
+            [[
+                'room_type_id' => 'RT001',
+                'name_room' => 'studio',
+                'desc_room' => '25 sq.m',
+                'price_room' => '4750',
+            ]]
+            );
     }
 
     /**

@@ -20,6 +20,17 @@ class CreateCfgBindRoomUsersTable extends Migration
             $table->foreign('user_id')->references('user_id')->on('inf_users')->onDelete('cascade');
             $table->foreign('room_id')->references('room_id')->on('inf_rooms')->onDelete('cascade');
         });
+
+        DB::table('cfg_bind_room_users')->insert(
+            [
+                [
+                    'room_user_id' => 'RU101',
+                    'user_id' => 'U004',
+                    'room_id' => 'A101'
+
+                ]
+            ]
+        );
     }
 
     /**

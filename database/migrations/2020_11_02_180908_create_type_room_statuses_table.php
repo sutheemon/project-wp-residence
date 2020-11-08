@@ -17,6 +17,20 @@ class CreateTypeRoomStatusesTable extends Migration
             $table->string('room_status_id', 20)->primary();
             $table->string('name_room_status', 100);
         });
+
+        DB::table('type_room_statuses')->insert(
+            [
+                [
+                    'room_status_id' => 'RS001',
+                    'name_room_status' => 'Room available'
+                ],
+
+                [
+                    'room_status_id' => 'RS002',
+                    'name_room_status' => 'Room not available'
+                ]
+            ]
+        );
     }
 
     /**
