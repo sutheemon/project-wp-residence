@@ -17,63 +17,93 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+
 </head>
 <body>
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </li>
-                            @endif
-                            
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
+    <div class="wrapper d-flex align-items-stretch">
+        <nav id="sidebar">
+            <div class="p-4 pt-5">
+                <div class="ResidenceName">
+                    <i class="fas fa-building fa-3x ml-2"></i>
+                    <span class="ml-2" style="font-size: 200%; color: #ffffff;"><b>P Residence</b></span>
+                    <p class="ml-2">Residence Management System.</p><br>
                 </div>
+
+                <ul class="list-unstyled components mb-5">
+                    <li>
+                        <a href="home">
+                        <i class="fas fa-home btn-lg ma-0"></i>
+                        <span style="font-size: 100%;">HOME</span></a>
+                    </li>
+
+                    @if (Auth::user()->role_type_id === 'A')
+                    <li>
+                        <a href="residence">
+                        <i class="fas fa-edit btn-lg ma-0"></i>
+                        <span style="font-size: 100%; margin: 0px;">MANAGE RESIDENCE</span></a>
+                    </li>
+                    @endif
+
+                    @if (Auth::user()->role_type_id === 'A')
+                    <li>
+                        <a href="bill">
+                        <i class="fas fa-file-invoice-dollar btn-lg ma-0"></i>
+                        <span class="ml-2" style="font-size: 100%; margin: 0px;">MANAGE BILL</span></a>
+                    </li>
+                    @endif
+
+                    @if (Auth::user()->role_type_id === 'U')
+                    <li>
+                        <a href="payment">
+                        <i class="fas fa-money-check-alt btn-lg ma-0"></i>
+                        <span class="ml-0" style="font-size: 100%; margin: 0px;">PAYMENT BILL</span></a>
+                    </li>
+                    @endif
+
+                    <li>
+                        <a href="profile">
+                        <i class="fas fa-user-alt btn-lg ma-0"></i>
+                        <span class="ml-1" style="font-size: 100%; margin: 0px;">MANAGE PROFILE</span></a>
+                    </li>
+
+                    <li>
+                        <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        <i class="fas fa-sign-out-alt btn-lg ma-0"></i>
+                        <span class="ml-1" style="font-size: 100%; margin: 0px;">{{ __('LOGOUT') }}</span></a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+                    </li>
+                </ul>
             </div>
         </nav>
 
-        <main class="py-4">
-            @yield('content')
-        </main>
+        <!-- Page Content  -->
+        <div id="content" class="p-4 p-md-5">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light" style="box-shadow: 0 4px 8px 0 #a7a7a733, 0 6px 20px 0 #a7a7a733;">
+                <div class="container-fluid">
+                    <button type="button" id="sidebarCollapse" class="btn btn-primary">
+                        <i class="fa fa-bars"></i>
+                        <span class="sr-only">Toggle Menu</span>
+                    </button>
+                    <div>
+                        <span class="mr-2" style="font-size: 100%; color: #51606d;">Name</span>
+                        <img src="images/user.png" width="35">
+                    </div>
+                </div>
+            </nav>
+
+            <div>
+                @yield('content')
+            </div>
+        </div>
     </div>
-</body>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/menu.js"></script>
+    <script src="js/popper.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
+  </body>
 </html>
-<!-- hello -->
