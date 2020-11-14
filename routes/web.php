@@ -24,3 +24,7 @@ Route::apiResource('residence', 'App\Http\Controllers\ResidenceController');
 Route::apiResource('bill', 'App\Http\Controllers\BillController');
 Route::apiResource('profile', 'App\Http\Controllers\ProfileController');
 Route::apiResource('payment', 'App\Http\Controllers\PaymentController');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
