@@ -53,6 +53,7 @@ class RegisterController extends Controller
             'username' => ['required', 'string', 'max:255'],
             'password' => ['required', 'string', 'min:4', 'confirmed'],
             'userid' => ['required', 'string', 'max:10'],
+            'roomid' => ['required', 'string', 'max:10'],
             'role' => ['required', 'string', 'max:1'],
         ]);
     }
@@ -68,6 +69,7 @@ class RegisterController extends Controller
         return User::create([
             'username' => $data['username'],
             'user_id' => $data['userid'],
+            'room_id' => $data['roomid'],
             'password' => Hash::make($data['password']),
             'role_type_id' => $data['role'],
         ]);

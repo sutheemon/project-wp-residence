@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class type_room_status extends Model
 {
     use HasFactory;
+    protected $fillable = 'name_room_status';
+
+    protected $primary = 'room_status_id';
 }
