@@ -45,7 +45,7 @@ class PaymentController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('payment.show');
     }
 
     /**
