@@ -17,11 +17,11 @@ class BillController extends Controller
     public function index()
     {
         $bill = DB::table('trx_bills')
-            ->join('inf_rooms', 'trx_bills.room_id', '=', 'inf_rooms.room_id')
-            ->join('type_bill_statuses', 'trx_bills.bill_status_id', '=', 'type_bill_statuses.bill_status_id')
-            ->join('type_unit_prices', 'trx_bills.unit_price_electric_id', '=', 'type_unit_prices.unit_price_id')
+            ->Join('inf_rooms', 'trx_bills.room_id', '=', 'inf_rooms.room_id')
+            ->Join('type_bill_statuses', 'trx_bills.bill_status_id', '=', 'type_bill_statuses.bill_status_id')
+            ->Join('type_unit_prices', 'trx_bills.unit_price_electric_id', '=', 'type_unit_prices.unit_price_id')
+            // ->select('trx_bills', 'trx_bills', 'trx_bills.')
             ->get();
-
         return view('bill.index', ['bills' => $bill]);
     }
 
@@ -151,8 +151,9 @@ class BillController extends Controller
      */
     public function destroy($id)
     {
-        dd($id);
-        trx_bill::find($id)->delete();
-        return redirect()->route('bill.index')->with('success','User Deleted');
+        // dd($id);
+        DB::table('trx_bills')->where('bill_id',$id )->delete();
+
+        return redirect('bill');
     }
 }
