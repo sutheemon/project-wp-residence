@@ -26,7 +26,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="userid" class="col-md-4 col-form-label text-md-right">{{ __('user ID') }}</label>
+                            <label for="userid" class="col-md-4 col-form-label text-md-right">{{ __('User ID') }}</label>
 
                             <div class="col-md-6">
                                 <input id="userid" type="text" class="form-control @error('userid') is-invalid @enderror" name="userid" value="{{ old('userid') }}" required autocomplete="userid" autofocus>
@@ -39,6 +39,19 @@
                             </div>
                         </div>
 
+                        <div class="form-group row">
+                            <label for="roomid" class="col-md-4 col-form-label text-md-right">{{ __('Room ID') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="roomid" type="text" class="form-control @error('roomid') is-invalid @enderror" name="roomid" value="{{ old('roomid') }}" required autocomplete="roomid" autofocus>
+
+                                @error('roomid')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
 
                         <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
