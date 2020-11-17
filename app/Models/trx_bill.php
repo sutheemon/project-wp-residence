@@ -17,7 +17,11 @@ class trx_bill extends Model
         'total_payment',
         'water_price',
         'unit_price_water_id',
-        'unit_price_electric _id',
-        'electric_price'
+        'unit_price_electric_id',
+        'electric_price',
+        'unit_water_after',
+        'unit_electric_after',
+        'unit_water_before',
+        'unit_electric_before'
     ];
 }
