@@ -23,7 +23,7 @@ class CreateInfRoomsTable extends Migration
             $table->foreign('room_type_id')->references('room_type_id')->on('type_rooms')->onDelete('cascade');
             $table->foreign('room_status_id')->references('room_status_id')->on('type_room_statuses')->onDelete('cascade');
             $table->foreign('user_id')->references('user_id')->on('inf_users')->onDelete('cascade');
-            $table->timestamps();
+            // $table->timestamps();
         });
 
         DB::table('inf_rooms')->insert(

@@ -38,4 +38,6 @@ Route::get('tenant/{id}/edit', 'App\Http\Controllers\TenantController@edit');
 Route::post('tenant/{id}', 'App\Http\Controllers\TenantController@update');
 Route::post('tenant/{roomID}/{userID}', 'App\Http\Controllers\TenantController@destroy');
 
+//API DELETE Bill
+Route::get('bill/delete/{billID}', 'App\Http\Controllers\BillController@destroy')->name('delete');
 
