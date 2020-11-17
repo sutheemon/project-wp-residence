@@ -20,11 +20,22 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::apiResource('residence', 'App\Http\Controllers\ResidenceController');
-Route::apiResource('bill', 'App\Http\Controllers\BillController');
-Route::apiResource('profile', 'App\Http\Controllers\ProfileController');
-Route::apiResource('payment', 'App\Http\Controllers\PaymentController');
+Route::resource('bill', 'App\Http\Controllers\BillController');
+Route::resource('profile', 'App\Http\Controllers\ProfileController');
+Route::resource('payment', 'App\Http\Controllers\PaymentController');
 
-Auth::routes();
+//API Residence
+Route::get('residence', 'App\Http\Controllers\ResidenceController@index');
+Route::get('residence/create', 'App\Http\Controllers\ResidenceController@create');
+Route::post('residence', 'App\Http\Controllers\ResidenceController@store');
+Route::get('residence/{residence}/edit', 'App\Http\Controllers\ResidenceController@edit');
+Route::post('residence/{residence}', 'App\Http\Controllers\ResidenceController@update');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//API Tenant
+Route::get('tenant/{id}/create', 'App\Http\Controllers\TenantController@create');
+Route::post('tenant', 'App\Http\Controllers\TenantController@store');
+Route::get('tenant/{id}/edit', 'App\Http\Controllers\TenantController@edit');
+Route::post('tenant/{id}', 'App\Http\Controllers\TenantController@update');
+Route::post('tenant/{roomID}/{userID}', 'App\Http\Controllers\TenantController@destroy');
+
+

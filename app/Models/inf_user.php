@@ -8,13 +8,21 @@ use Illuminate\Database\Eloquent\Model;
 class inf_user extends Model
 {
     use HasFactory;
+
+    protected $primary = 'user_id';
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     protected $fillable = [
-        'user_id',
         'id_card',
         'F_name',
         'L_name',
         'phone_number',
         'email',
-        'address'
+        'address',
+        'user_id'
     ];
 }

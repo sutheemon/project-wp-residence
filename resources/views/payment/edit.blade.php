@@ -11,14 +11,22 @@ Payment Bill
 <h1>Payment Bill</h1>
 <hr>
 <div class="row">
+    <!-- Detail Bill -->
     <div class="card shadow mb-4 col-md-8">
         <div class="card-body">
             <form method="get" action="#">
                 {{ $data[0]->bill_id}}
+                @if($data[0]->bill_status_id === 'BS003')
+                <!-- <a href="{{ $data[0]->pic }}">View Image</a><br> -->
+                <img src="{{  $data[0]->pic }}" alt="bill" width="300">
+                @else
+                <a>No Image</a>
+                @endif
             </form>
         </div>
     </div>
 
+    <!-- Upload Image Slip -->
     <div class="card shadow mb-4 col-md-4">
         <div class="card-body">
 
@@ -40,5 +48,12 @@ Payment Bill
 </div>
 
 </div>
+@if(Session::has('alert'))
+
+<script type="text/javascript">
+    alert("Please upload files");
+</script>
+
+@endif
 
 @endsection

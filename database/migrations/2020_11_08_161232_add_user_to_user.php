@@ -16,9 +16,11 @@ class AddUserToUser extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->string('username')->after('id');
             $table->string('role_type_id', 20)->after('password');
+            $table->string('room_id', 20)->after('remember_token');
             $table->string('user_id', 20)->after('remember_token');
             $table->foreign('role_type_id')->references('role_type_id')->on('type_roles')->onDelete('cascade');
             $table->foreign('user_id')->references('user_id')->on('inf_users')->onDelete('cascade');
+            $table->foreign('room_id')->references('room_id')->on('inf_rooms')->onDelete('cascade');
         });
     }
 

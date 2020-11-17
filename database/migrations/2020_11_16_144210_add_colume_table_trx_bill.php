@@ -18,7 +18,7 @@ class AddColumeTableTrxBill extends Migration
             $table->integer('unit_water_after')->after('unit_price_water_id');
             $table->integer('unit_electric_before')->after('unit_price_electric_id');
             $table->integer('unit_electric_after')->after('unit_price_electric_id');
-            $table->string('pic')->after('bill_id');
+            $table->string('pic')->after('bill_id')->nullable($value = true);
         });
     }
 

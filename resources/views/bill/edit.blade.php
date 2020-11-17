@@ -12,11 +12,11 @@ Manage Bill
 
 <div class="card shadow mb-4">
     <form method="POST" action="{{ route('bill.update', $data[0]->bill_id) }}">
-    @csrf
+        @csrf
         {{ method_field('PATCH') }}
         <div class="card-header py-3" style="color: black;">
             <div class="row" style="font-size:120%;">
-                <div class="col-md-6 m-0 font-weight-bold" >
+                <div class="col-md-6 m-0 font-weight-bold">
                     Bill Detail : {{$data[0]->bill_id}}
                 </div>
                 @if($data[0]->bill_status_id === 'BS001')
@@ -68,19 +68,23 @@ Manage Bill
         </div>
 
         <div class="card-body text-center">
-
+            @if($data[0]->bill_status_id === 'BS003')
             <a href="{{ $data[0]->pic }}">View Image</a><br>
             <img src="{{  $data[0]->pic }}" alt="bill" width="300">
+            @else
+            <a>No Image</a>
+            @endif
         </div>
+
         <div class="card-footer">
 
-        <div>
-        @if($data[0]->bill_status_id === 'BS001')
-            <button class="btn" style=" background-color: rgb(62, 212, 74); color: #ffff">Confirm Payment</button>
-            @else
-            <button class="btn" style=" background-color: rgb(62, 212, 74); color: #ffff" disabled>Confirm Payment</button>
-        @endif
-        </div>
+            <div>
+                @if($data[0]->bill_status_id === 'BS001')
+                <button class="btn" style=" background-color: rgb(62, 212, 74); color: #ffff">Confirm Payment</button>
+                @else
+                <button class="btn" style=" background-color: rgb(62, 212, 74); color: #ffff" disabled>Confirm Payment</button>
+                @endif
+            </div>
     </form>
 </div>
 

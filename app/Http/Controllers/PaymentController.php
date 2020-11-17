@@ -19,7 +19,7 @@ class PaymentController extends Controller
     public function index()
     {
         $id = Auth::user()->user_id;
-        $room = DB::table('cfg_bind_room_users')->where('user_id', $id)->get();
+        $room = DB::table('inf_rooms')->where('user_id', $id)->get();
 
         // dd($room);
         $bill = DB::table('trx_bills')
@@ -105,15 +105,14 @@ class PaymentController extends Controller
 
                 DB::table('trx_bills')
                 ->where('bill_id', $id)
-                ->update(['pic' => $url]);
+                ->update(['pic' => $url , 'bill_status_id' => 'BS003']);
 
                 Session::flash('success', "Success!");
                 return redirect()->back();
             }
         }
-        abort(500, 'Could not upload image :(');
-
-        // return redirect()->back();
+        // abort(500, 'Could not upload image :(');
+        return redirect()->back()->with('alert',"");
     }
 
     /**
