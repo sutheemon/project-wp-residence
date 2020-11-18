@@ -46,4 +46,5 @@ Route::post('tenant/{roomID}/{userID}', 'App\Http\Controllers\TenantController@d
 
 //API DELETE Bill
 Route::get('bill/delete/{billID}', 'App\Http\Controllers\BillController@destroy')->name('delete');
-
+Route::get('bill/{id}/editbill', 'App\Http\Controllers\BillController@editBill')->name('bill.editBill');
+Route::patch('bill/{id}/updatebill', 'App\Http\Controllers\BillController@updateBill')->name('bill.updateBill');

@@ -25,6 +25,7 @@ $seq = 1;
     <div class="card-body">
         <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+
                 <thead>
                     <tr>
                         <th>#</th>
@@ -58,15 +59,19 @@ $seq = 1;
                         </td>
                         @else
                         <td>
-                            <span class="badge badge-warning">In the midst of verification</span>
+                            <span class="badge badge-warning">Checking</span>
                         </td>
                         @endif
                         <td>
                             <a href="{{ route('bill.edit', $data->bill_id) }}" type="button" class="btn btn-warning btn-rounded btn-sm my-0">
                                 <i class="fa fa-check mt-0"></i> Check
                             </a>
-                            <a href="{{ route('delete', $data->bill_id) }}" onclick="return confirm('Are you sure?')" type="button" class="btn btn-dark btn-rounded btn-sm my-0">
-                            <i class='fa fa-trash mt-0'></i></a>
+                            @if ($data->bill_status_id === 'BS001')
+                            <a href="{{ route('bill.editBill', $data->bill_id) }}" type="button" class="btn btn-primary btn-rounded btn-sm my-0">
+                                <i class="fa fa-pencil-alt mt-0"></i> Edit
+                            </a>
+                            @endif
+                            
                         </td>
                     </tr>
                     @endforeach
