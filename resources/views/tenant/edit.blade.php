@@ -75,13 +75,16 @@
             </div>
           @endif
           <hr>
+          <div class="row">
             <a href="{{ URL::to('residence') }}" type="button" class="btn btn-secondary mr-2">Cancel</a>
             <button type="submit" onclick="confirm('Want to edit a tenant?')" class="btn btn-success"><i class="fa-floppy-o"></i>  Save</button>
           </form>
-          <form method="post" class="delete" action="{{url('tenant/'. $roomId .'/'.$user[0]->user_id)}}">
+          
+          <form method="post" class="delete ml-2" action="{{url('tenant/'. $roomId .'/'.$user[0]->user_id)}}">
             {{csrf_field()}}
             <button type="submit" onclick="confirm('Want to delete a tenant?')" class="btn btn-danger">Delete</button>
           </form>
+    </div>
     </div>
   </div>
 </div>

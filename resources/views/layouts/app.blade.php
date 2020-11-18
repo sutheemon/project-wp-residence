@@ -39,7 +39,8 @@
                         <i class="fas fa-home btn-lg ma-0"></i>
                         <span style="font-size: 100%;">HOME</span></a>
                     </li>
-
+                    
+                    {{Auth::user()->user_id}}
                     @if (Auth::user()->role_type_id === 'A')
                     <li>
                         <a href="{{ URL::to('residence') }}">

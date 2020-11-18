@@ -133,11 +133,13 @@ class TenantController extends Controller
      */
     public function destroy($room_id, $user_id)
     {
-        inf_room::where('room_id', $room_id)
-          ->update([
-              'user_id' => null,
-              'room_status_id' => 'RS001'
-          ]);
+        
+          DB::table('inf_rooms')
+                ->where('room_id', $room_id)
+              ->update([
+                'user_id' => null,
+                'room_status_id' => 'RS001'
+              ]);
 
         DB::table('inf_users')->where('user_id',$user_id )->delete();
 
