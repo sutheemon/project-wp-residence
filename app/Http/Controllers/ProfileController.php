@@ -7,6 +7,8 @@ use Models\inf_user;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Session;
 
 class ProfileController extends Controller
 {
@@ -86,7 +88,7 @@ class ProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-
+// dd($request);
         $request->validate([
             'user_id' => 'required',
             'F_name' => 'required',
@@ -96,8 +98,7 @@ class ProfileController extends Controller
             'phone_number' => 'required',
             'email' => 'required'
         ]);
-        
-        
+          
         $data = DB::table('inf_users')
             ->where('user_id',$id)
             ->update([
@@ -111,30 +112,28 @@ class ProfileController extends Controller
             
         ]);
 
-
-        /* ---Image upload
         if ($request->hasFile('image')) {
             //  Let's do everything here
             if ($request->file('image')->isValid()) {
                 //
                 $validated = $request->validate([
-                    'name' => 'string|max:40',
+                    'user_id' => 'string|max:40',
                     'image' => 'mimes:jpg,jpeg,png|max:1014',
                 ]);
                 $extension = $request->image->extension();
-                $request->image->storeAs('/public', $validated['name'].".".$extension);
-                $url = Storage::url($validated['name'].".".$extension);
+                $request->image->storeAs('/public', $validated['user_id'].".".$extension);
+                $url = Storage::url($validated['user_id'].".".$extension);
                
                 $userpic = DB::table('inf_users')
                     ->where('user_id', $id)
                     ->update(['pic' => $url]);
                     
                 Session::flash('success', "Success!");
-                return redirect()->back();
+                return redirect('profile');
             }
 
         }
-        */
+        
             
         return redirect('profile');
     }

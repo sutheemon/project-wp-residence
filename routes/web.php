@@ -24,12 +24,6 @@ Route::resource('bill', 'App\Http\Controllers\BillController');
 Route::resource('profile', 'App\Http\Controllers\ProfileController');
 Route::resource('payment', 'App\Http\Controllers\PaymentController');
 
-//API Profile
-Route::get('profile', 'App\Http\Controllers\ProfileController@index');
-Route::get('profile/{profile}/edit', 'App\Http\Controllers\ProfileController@edit')->name('profile.edit');
-Route::post('profile/{profile}', 'App\Http\Controllers\ProfileController@update');
-
-
 //API Residence
 Route::get('residence', 'App\Http\Controllers\ResidenceController@index');
 Route::get('residence/create', 'App\Http\Controllers\ResidenceController@create');
