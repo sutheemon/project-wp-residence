@@ -8,7 +8,7 @@ Manage Bill
 
 @section('content')
 <div class="row justify-content-between">
-    <h3 class="h3 text-gray-800 ml-3">Edit Bill</h3>
+    <h3 class="h3 text-gray-800 ml-3">Edit Status Bill</h3>
 </div>
 <hr>
 
@@ -29,7 +29,7 @@ Manage Bill
             </div>
             @else
             <div class="col-md-6 text-lg-right">
-                <span class="badge badge-warning">In the midst of verification</span>
+                <span class="badge badge-warning">Checking</span>
             </div>
             @endif
         </div>
@@ -56,43 +56,53 @@ Manage Bill
                     <b>Floor : </b><a>{{$data[0]->room_floor}}</a>
                 </div>
             </div>
-            <hr>
+
 
             <div class="table-responsive">
-                    <table class="table table-bordered" width="100%" cellspacing="0">
+                <table class="table table-bordered" width="100%" cellspacing="0">
+                    <colgroup>
+                        <col width="60%">
+                        <col width="15%">
+                        <col width="15%">
+                        <col width="10%">
+                    </colgroup>
                     <thead>
-                            <tr>
-                                <th>Payment list</th>
-                                <th>THB</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><b>room : </b>{{ $data[0]->name_room }}</td>
-                                <td>{{ $data[0]->price_room }}</td>
-                            </tr>
-                            <tr>
-                                <td><b>Water bill : </b> 
-                                Unit water before : {{$data[0]->unit_water_before}} - after : {{$data[0]->unit_water_after}}
-                                 -> Used {{ $data[0]->unit_water_after-$data[0]->unit_water_before }}
-                                </td>
-                                <td>{{ $data[0]->water_price }}</td>
-                            </tr>
-                            <tr>
-                                <td><b>Electric bill : </b>
-                                Unit electric before : {{$data[0]->unit_electric_before}} - after : {{$data[0]->unit_electric_after}}
-                                -> Used {{ $data[0]->unit_electric_after-$data[0]->unit_electric_before }}
-                            </td>
-                                <td>{{ $data[0]->electric_price }}</td>
-                            </tr>
+                        <tr>
+                            <th>Payment list</th>
+                            <th>Payment of unit</th>
+                            <th>Unit used</th>
+                            <th>THB</th>
+                        </tr>
+                    </thead>
+                    <tbody>
 
-                            <tr>
-                                <td><b>Total</b></td>
-                                <td><b>{{ $data[0]->total_payment }}</b></td>
-                            </tr>
+                        <tr>
+                            <td>Water bill</td>
+                            <td>{{ $unit[1]->value_unit }}</td>
+                            <td>{{ $data[0]->unit_water_after-$data[0]->unit_water_before }}</td>
+                            <td>{{ $data[0]->water_price }}</td>
+                        </tr>
+                        <tr>
+                            <td>Electric bill</td>
+                            <td>{{ $unit[0]->value_unit }}</td>
+                            <td>{{ $data[0]->unit_electric_after-$data[0]->unit_electric_before }}</td>
+                            <td>{{ $data[0]->electric_price }}</td>
+                        </tr>
+                        <tr>
+                            <td>Room {{ $data[0]->name_room }}</td>
+                            <td></td>
+                            <td></td>
+                            <td>{{ $data[0]->price_room }}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Total</b></td>
+                            <td></td>
+                            <td></td>
+                            <td><b>{{ $data[0]->total_payment }}</b></td>
+                        </tr>
 
-                        </tbody>
-                    </table>
+                    </tbody>
+                </table>
             </div>
 
         </div>
@@ -107,14 +117,18 @@ Manage Bill
         </div>
 
         <div class="card-footer">
+            <a href="{{ url('bill') }}" type="button" class="btn btn-secondary mr-2">Cancel</a>
 
-            <div>
-                @if($data[0]->bill_status_id === 'BS003')
-                <button class="btn" style=" background-color: rgb(62, 212, 74); color: #ffff">Confirm Payment</button>
-                @else
-                <button class="btn" style=" background-color: rgb(62, 212, 74); color: #ffff" disabled>Confirm Payment</button>
-                @endif
-            </div>
+            @if($data[0]->bill_status_id === 'BS003')
+            <button class="btn" style=" background-color: rgb(62, 212, 74); color: #ffff">Confirm Payment</button>
+            @endif
+
+            @if($data[0]->bill_status_id === 'BS001' || $data[0]->bill_status_id === 'BS002')
+            <a href="{{ route('delete', $data[0]->bill_id) }}" onclick="return confirm('Are you sure?')" type="button" class="btn btn-danger mr-2">
+            Delete
+            </a>
+            @endif
+
     </form>
 </div>
 <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
