@@ -18,12 +18,14 @@ class PaymentController extends Controller
      */
     public function index()
     {
-        $id = Auth::user()->user_id;
-        $room = DB::table('inf_rooms')->where('user_id', $id)->get();
+        $id = Auth::user()->room_id;
 
         // dd($room);
         $bill = DB::table('trx_bills')
-        ->where('room_id', $room[0]->room_id)
+        ->join('inf_rooms', 'trx_bills.room_id', '=', 'inf_rooms.room_id')
+        ->join('type_rooms','inf_rooms.room_type_id', '=', 'type_rooms.room_type_id')
+        ->select('trx_bills.*','type_rooms.price_room')
+        ->where('inf_rooms.room_id', $id)
         ->get();
 
         return view('payment.index', ['bills' => $bill]);
