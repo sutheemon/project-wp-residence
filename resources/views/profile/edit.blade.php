@@ -8,7 +8,6 @@
 
 @section('content')
 
-@foreach ($users as $data)
 
 <div class="row">
 
@@ -20,7 +19,7 @@
                 <h6 class="m-0 font-weight-bold text-primary">Manage Profile</h6>
 
                 <div class="d-sm-flex align-items-center justify-content-end mb-4">
-                <a href="{{route('profile.edit', $data->user_id)}}" class="btn btn-primary" type="button" style="height: 45px; width: 150px;"  >
+                <a href="{{route('profile.edit', $users[0]->user_id)}}" class="btn btn-primary" type="button" style="height: 45px; width: 150px;"  >
                   
                   <i class="fas fa-user-edit fa-sm text-white-50"></i> Edit Profile 
                   
@@ -30,8 +29,9 @@
 
             </div>
             <div class="card-body">
-              <form>
-              
+            <form action="{{url('profile/'.$users[0]->user_id)}}" method="post" class="needs-validation" novalidate>
+            {{ csrf_field() }}
+
               <div class=".col-6 ">
                   <div class="mx-auto" style="width: 140px;">
                     <div class="d-flex justify-content-center align-items-center rounded" style="height: 140px; background-color: rgb(233, 236, 239);">
@@ -49,36 +49,36 @@
                     <div class="form-row">
                       <div class="form-group col-md-6">
                         <label for="inputEmail4">Firstname</label>
-                        <input id=" fistname " value="{{ $data->F_name}}" type="text" class="form-control">
+                        <input id="text" required name="F_name" value="{{ $users[0]->F_name}}" type="text" class="form-control">
 
                       </div>
 
                       <div class="form-group col-md-6">
                         <label for="inputPassword4">Lastname</label>
-                        <input id="myText" value="{{ $data->L_name}}" type="text" class="form-control">
+                        <input id="text" required name="L_name" value="{{ $users[0]->L_name}}" type="text" class="form-control">
                       </div>
                     </div>
 
                     <div class="form-group">
                       <label for="inputAddress">ID Card</label>
-                      <input type="text"  value="{{ $data->id_card}}" class="form-control">
+                      <input type="idcard"  required name="id_card" value="{{ $users[0]->id_card}}" class="form-control">
                     </div>
 
                     <div class="form-group">
                       <label for="inputAddress2">Address</label>
-                      <input id="myText"  value="{{ $data->address}}" type="text" class="form-control">
+                      <input id="address"  required name="address" value="{{ $users[0]->address}}" type="text" class="form-control">
                     </div>
                     
 
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="inputEmail4">Tel.</label>
-                            <input id="myText"  value="{{ $data->phone_number}}" type="text" class="form-control">
+                            <input id="phonenumber" required name="phone_number" value="{{ $users[0]->phone_number}}" type="text" class="form-control">
                           </div>
 
                           <div class="form-group col-md-6">
                             <label for="inputPassword4">E-mail</label>
-                            <input id="myText"  value="{{ $data->email}}" type="text"  class="form-control">
+                            <input id="email"  required name="email" value="{{ $users[0]->email}}" type="text"  class="form-control">
                           </div>
                     </div>
 
@@ -97,11 +97,12 @@
                    
                   </form>
                 <hr>
-                <button class="btn" style="height: 45px; width: 100px; background-color: rgb(62, 212, 74); color: #ffff">Save</button>
+                <a href="{{ URL::to('profile') }}" type="button" class="btn btn-secondary mr-2">Cancel</a>
+                <button type="submit" onclick="confirm('comfirm to edit profile?')" class="btn btn-success"><i class="fa-floppy-o"></i>  Save</button>
             </div>
         </div>
 </div>
-@endforeach
+
 
 
 

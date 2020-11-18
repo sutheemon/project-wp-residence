@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Models\User;
-
+use Models\inf_user;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -68,7 +68,7 @@ class ProfileController extends Controller
      */
     public function edit($id)
     {
-        $user_login = Auth::user();
+            $user_login = Auth::user();
             $users      = DB::table('inf_users')
                 ->where('user_id',$id)
                 ->get();
@@ -86,7 +86,63 @@ class ProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        
+        $request->validate([
+            'user_id' => 'required',
+            'F_name' => 'required',
+            'L_name' => 'required',
+            'id_card' => 'required',
+            'address' => 'required',
+            'phone_number' => 'required',
+            'email' => 'required'
+        ]);
+        
+        $data = DB::table('inf_users')
+            ->where('user_id',$id)
+            ->update([
+                'F_name' => $request['F_name'],
+                'L_name' => $request['L_name'],
+                'id_card' => $request['id_card'],
+                'address' => $request['address'],
+                'phone_number' => $request['phone_number'],
+                'email' => $request['email'],
+            
+        ]);
+
+        if ($request->hasFile('image')) {
+            //  Let's do everything here
+            if ($request->file('image')->isValid()) {
+                //
+                $validated = $request->validate([
+                    'name' => 'string|max:40',
+                    'image' => 'mimes:jpg,jpeg,png|max:1014',
+                ]);
+                $extension = $request->image->extension();
+                $request->image->storeAs('/public', $validated['name'].".".$extension);
+                $url = Storage::url($validated['name'].".".$extension);
+
+                DB::table('inf_users')
+                ->where('user_id', $id)
+                ->update(['pic' => $url]);
+
+                Session::flash('success', "Success!");
+                return redirect()->back();
+            }
+            
+
+        /*
+        inf_user::where('user_id', $id)
+        ->update([
+            'user_id'   =>  $id,
+            'F_name'    =>  $request->F_name,
+            'L_name'    =>  $request->L_name,
+            'id_card'   =>  $request->id_card,
+            'phone_number' => $request->phone_number,
+            'email'     => $request->email
+        ]);
+        */
+        
+        return redirect('profile');
     }
 
     /**
