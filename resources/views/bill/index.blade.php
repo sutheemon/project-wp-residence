@@ -42,7 +42,7 @@ $seq = 1;
                     @foreach($bills as $data)
                     <tr>
                         <td>{{ $seq++ }}</td>
-                        <td>{{date('d-m-Y', strtotime($data->created_at))}}</td>
+                        <td>{{date('d/m/Y', strtotime($data->created_at))}}</td>
                         <td>{{ $data->bill_id }}</td>
                         <td>{{ $data->room_id }}</td>
                         <td>{{ $data->room_build }}</td>
@@ -63,7 +63,7 @@ $seq = 1;
                         @endif
                         <td>
                             <a href="{{ route('bill.edit', $data->bill_id) }}" type="button" class="btn btn-warning btn-rounded btn-sm my-0">
-                                <i class="fas fa-pencil-alt mt-0"></i> Edit
+                                <i class="fa fa-check mt-0"></i> Check
                             </a>
                             <a href="{{ route('delete', $data->bill_id) }}" onclick="return confirm('Are you sure?')" type="button" class="btn btn-dark btn-rounded btn-sm my-0">
                             <i class='fa fa-trash mt-0'></i></a>

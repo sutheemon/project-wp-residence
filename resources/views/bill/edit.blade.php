@@ -43,9 +43,6 @@ Manage Bill
                 <div class="col-md-4">
                     <b>Date : </b><a>{{$data[0]->created_at}}</a>
                 </div>
-                <div class="col-md-4">
-                    <b>Total Payment : </b><a>{{$data[0]->total_payment}}</a>
-                </div>
             </div>
 
             <div class="row">
@@ -59,17 +56,43 @@ Manage Bill
                     <b>Floor : </b><a>{{$data[0]->room_floor}}</a>
                 </div>
             </div>
+            <hr>
 
-            <div class="row">
-                <div class="col-md-4">
-                    <b>Room Payment : </b><a>{{$data[0]->price_room}}</a>
-                </div>
-                <div class="col-md-4">
-                    <b>Water Payment : </b><a>{{$data[0]->water_price}}</a>
-                </div>
-                <div class="col-md-4">
-                    <b>Electric Payment : </b><a>{{$data[0]->electric_price}}</a>
-                </div>
+            <div class="table-responsive">
+                    <table class="table table-bordered" width="100%" cellspacing="0">
+                    <thead>
+                            <tr>
+                                <th>Payment list</th>
+                                <th>THB</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><b>room : </b>{{ $data[0]->name_room }}</td>
+                                <td>{{ $data[0]->price_room }}</td>
+                            </tr>
+                            <tr>
+                                <td><b>Water bill : </b> 
+                                Unit water before : {{$data[0]->unit_water_before}} - after : {{$data[0]->unit_water_after}}
+                                 -> Used {{ $data[0]->unit_water_after-$data[0]->unit_water_before }}
+                                </td>
+                                <td>{{ $data[0]->water_price }}</td>
+                            </tr>
+                            <tr>
+                                <td><b>Electric bill : </b>
+                                Unit electric before : {{$data[0]->unit_electric_before}} - after : {{$data[0]->unit_electric_after}}
+                                -> Used {{ $data[0]->unit_electric_after-$data[0]->unit_electric_before }}
+                            </td>
+                                <td>{{ $data[0]->electric_price }}</td>
+                            </tr>
+
+                            <tr>
+                                <td><b>Total</b></td>
+                                <td><b>{{ $data[0]->total_payment }}</b></td>
+                            </tr>
+
+                        </tbody>
+                    </table>
             </div>
 
         </div>
@@ -79,7 +102,7 @@ Manage Bill
             <!-- <a href="{{ $data[0]->pic }}">View Image</a><br> -->
             <img src="{{  $data[0]->pic }}" alt="bill" width="300">
             @else
-            <a>No Image</a>
+            <a>No bill payment slip</a>
             @endif
         </div>
 
@@ -94,5 +117,5 @@ Manage Bill
             </div>
     </form>
 </div>
-
+<script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
 @endsection
