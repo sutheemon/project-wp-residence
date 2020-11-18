@@ -86,7 +86,7 @@ class ProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
+
         $request->validate([
             'user_id' => 'required',
             'F_name' => 'required',
@@ -97,9 +97,11 @@ class ProfileController extends Controller
             'email' => 'required'
         ]);
         
+        
         $data = DB::table('inf_users')
             ->where('user_id',$id)
             ->update([
+                'user_id' => $id,
                 'F_name' => $request['F_name'],
                 'L_name' => $request['L_name'],
                 'id_card' => $request['id_card'],
@@ -109,6 +111,8 @@ class ProfileController extends Controller
             
         ]);
 
+
+        /* ---Image upload
         if ($request->hasFile('image')) {
             //  Let's do everything here
             if ($request->file('image')->isValid()) {
@@ -120,28 +124,18 @@ class ProfileController extends Controller
                 $extension = $request->image->extension();
                 $request->image->storeAs('/public', $validated['name'].".".$extension);
                 $url = Storage::url($validated['name'].".".$extension);
-
-                DB::table('inf_users')
-                ->where('user_id', $id)
-                ->update(['pic' => $url]);
-
+               
+                $userpic = DB::table('inf_users')
+                    ->where('user_id', $id)
+                    ->update(['pic' => $url]);
+                    
                 Session::flash('success', "Success!");
                 return redirect()->back();
             }
-            
 
-        /*
-        inf_user::where('user_id', $id)
-        ->update([
-            'user_id'   =>  $id,
-            'F_name'    =>  $request->F_name,
-            'L_name'    =>  $request->L_name,
-            'id_card'   =>  $request->id_card,
-            'phone_number' => $request->phone_number,
-            'email'     => $request->email
-        ]);
+        }
         */
-        
+            
         return redirect('profile');
     }
 

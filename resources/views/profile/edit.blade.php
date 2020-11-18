@@ -10,53 +10,47 @@
 
 
 <div class="row">
-
     <div class="col-xl-12">
 
         <!-- Area Chart -->
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Manage Profile</h6>
-
-                <div class="d-sm-flex align-items-center justify-content-end mb-4">
-                <a href="{{route('profile.edit', $users[0]->user_id)}}" class="btn btn-primary" type="button" style="height: 45px; width: 150px;"  >
-                  
-                  <i class="fas fa-user-edit fa-sm text-white-50"></i> Edit Profile 
-                  
-                </a> 
+                <h6 class="m-0 font-weight-bold text-primary">Edit Profile</h6>
             </div>
-
-
-            </div>
+            
             <div class="card-body">
-            <form action="{{url('profile/'.$users[0]->user_id)}}" method="post" class="needs-validation" novalidate>
-            {{ csrf_field() }}
+                <form action="{{url('profile/'.$users[0]->user_id)}}" method="post" class="needs-validation" novalidate enctype="multipart/form-data">
+                @csrf
+                {{ csrf_field() }}
+                
+                    <div class=".col-4 ">
+                        <div class="mx-auto" style="width: 140px;">
+                            <div class="d-flex justify-content-center align-items-center rounded"      style="height: 140px; background-color: rgb(233, 236, 239);">
+                            <span style="color: rgb(166, 168, 170); font: bold 8pt Arial;">140x140</span>
+                        </div>
 
-              <div class=".col-6 ">
-                  <div class="mx-auto" style="width: 140px;">
-                    <div class="d-flex justify-content-center align-items-center rounded" style="height: 140px; background-color: rgb(233, 236, 239);">
-                      <span style="color: rgb(166, 168, 170); font: bold 8pt Arial;">140x140</span>
+                        <img src="{{ $users[0]->pic }}"  width="250">
+
+                        <input type="hidden" class="form-control" id="name" name="name" value="{{ $users[0]->user_id }}">
+                       
+                        <input id="image" type="file" name="image">
+                    
+                                 
                     </div>
 
-                    <button class="btn btn-primary" type="button">
-                    <i class="fas fa-camera"></i>
-                        <span>Change Photo</span>
-                      </button>
-                  </div>
-
-
-
                     <div class="form-row">
-                      <div class="form-group col-md-6">
-                        <label for="inputEmail4">Firstname</label>
-                        <input id="text" required name="F_name" value="{{ $users[0]->F_name}}" type="text" class="form-control">
 
-                      </div>
+                        <div class="form-group col-md-6">
+                            <label for="inputEmail4">Firstname</label>
+                            <input id="text" required name="F_name" value="{{ $users[0]->F_name}}" type="text" class="form-control">
 
-                      <div class="form-group col-md-6">
-                        <label for="inputPassword4">Lastname</label>
-                        <input id="text" required name="L_name" value="{{ $users[0]->L_name}}" type="text" class="form-control">
-                      </div>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label for="inputPassword4">Lastname</label>
+                            <input id="text" required name="L_name" value="{{ $users[0]->L_name}}" type="text" class="form-control">
+                        </div>
+
                     </div>
 
                     <div class="form-group">
@@ -69,7 +63,6 @@
                       <input id="address"  required name="address" value="{{ $users[0]->address}}" type="text" class="form-control">
                     </div>
                     
-
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="inputEmail4">Tel.</label>
@@ -93,17 +86,22 @@
                             <label for="inputPassword4">Password</label>
                             <input id="myText"  value="{{ $user_login->password}}"  type="password" class="form-control" Disabled>
                           </div>
-                    </div>
                    
-                  </form>
-                <hr>
-                <a href="{{ URL::to('profile') }}" type="button" class="btn btn-secondary mr-2">Cancel</a>
-                <button type="submit" onclick="confirm('comfirm to edit profile?')" class="btn btn-success"><i class="fa-floppy-o"></i>  Save</button>
+
+
+                    <hr>
+                    <div class="mx-auto" >
+                        <a href="{{ URL::to('profile') }}" type="button" class="btn btn-secondary mr-2">Cancel</a>
+                        <button type="submit" onclick="confirm('comfirm to edit profile?')" class="btn btn-success"><i class="fa-floppy-o"></i>  Save </button>
+                    </div>
+            
             </div>
         </div>
+    </div>
 </div>
 
-
+<script src="{{ asset('js/required.js') }}"></script>
 
 
 @endsection
+
