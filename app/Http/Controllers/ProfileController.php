@@ -2,18 +2,30 @@
 
 namespace App\Http\Controllers;
 
+use Models\User;
+
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
-    /**
+    /** 
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        return view('profile.index');
+
+        $id         = Auth::user()->user_id;
+        $user_login = Auth::user();
+        $users      = DB::table('inf_users')
+            ->where('user_id',$id)
+            ->get();
+
+        return view('profile.index', compact('users' ,'user_login'));
+
     }
 
     /**
@@ -45,7 +57,7 @@ class ProfileController extends Controller
      */
     public function show($id)
     {
-        //
+       
     }
 
     /**
@@ -56,7 +68,13 @@ class ProfileController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user_login = Auth::user();
+            $users      = DB::table('inf_users')
+                ->where('user_id',$id)
+                ->get();
+    
+            return view('profile.edit', compact('users','user_login'));
+
     }
 
     /**

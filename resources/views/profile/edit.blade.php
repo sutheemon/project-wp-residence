@@ -2,7 +2,7 @@
 
 @section('title')
     
-    Manage Profile
+    Edit Profile
     
 @endsection
 
@@ -82,17 +82,19 @@
                           </div>
                     </div>
 
+
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="inputEmail4">Username</label>
-                            <input id="myText"  value="{{ $user_login->username}}" class="form-control">
+                            <input id="myText" value="{{ $user_login->username}}" class="form-control" Disabled>
                           </div>
                           
                           <div class="form-group col-md-6">
                             <label for="inputPassword4">Password</label>
-                            <input id="myText"  value="{{ $user_login->password}}"  type="password" class="form-control">
+                            <input id="myText"  value="{{ $user_login->password}}"  type="password" class="form-control" Disabled>
                           </div>
                     </div>
+                   
                   </form>
                 <hr>
                 <button class="btn" style="height: 45px; width: 100px; background-color: rgb(62, 212, 74); color: #ffff">Save</button>
