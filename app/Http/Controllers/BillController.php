@@ -65,8 +65,8 @@ class BillController extends Controller
             $water_price = $unitprice[0]->value_unit * ($request['unit_water']-($unitbefore->unit_water_after));
             $total = $electric_price + $water_price + $room->price_room;
 
-            $unit_water_before = $unitbefore->unit_water_before;
-            $unit_electric_before = $unitbefore->unit_electric_before;
+            $unit_water_before = $request['unit_water']-($unitbefore->unit_water_after);
+            $unit_electric_before = $request['unit_electric']-($unitbefore->unit_electric_after);
         }
         else    {
             $electric_price = $unitprice[1]->value_unit * $request['unit_electric'];
