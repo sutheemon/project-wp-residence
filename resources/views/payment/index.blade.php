@@ -17,7 +17,6 @@ Payment Bill
     </div>
 </div>
 @endif
-
 <div class="row">
     @foreach($bills as $data)
     <div class="col-xl-4 col-lg-4 text-center">
@@ -34,7 +33,7 @@ Payment Bill
                 <img src="https://www.flaticon.com/svg/static/icons/svg/3062/3062544.svg" style="width: 100px" />
                 <div class="mt-3 d-flex justify-content-between mx-5">
                     <span>Room Bill</span>
-                    <span>{{ $data->room_id}}</span>
+                    <span>{{ $data->price_room}}</span>
                 </div>
                 <div class="mt-3 d-flex justify-content-between mx-5">
                     <span>Water Bill</span>
@@ -43,6 +42,10 @@ Payment Bill
                 <div class="mt-3 d-flex justify-content-between mx-5">
                     <span>Eliectric Bill</span>
                     <span>{{ $data->electric_price}}</span>
+                </div>
+                <div class="mt-3 d-flex justify-content-between mx-5">
+                    <span>Total</span>
+                    <span>{{ $data->total_payment}}</span>
                 </div>
                 <div class="mt-3 d-flex justify-content-between mx-5">
                     <span>Status Bill</span>
@@ -54,7 +57,7 @@ Payment Bill
                     <h5><span class="badge badge-warning">Checking</span></h5>
                     @endif
                 </div>
-                <a href="{{  route('payment.edit', $data->bill_id) }}" class="btn btn-dark btn-block mt-5">View Bill</a>
+                <a href="{{  route('payment.edit', $data->bill_id) }}" class="btn btn-primary btn-block mt-5">View Bill</a>
             </div>
         </div>
     </div>
