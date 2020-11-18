@@ -18,7 +18,7 @@ class AddFlidsDataBill extends Migration
                 [
                     'bill_id' => '170920_A101',
                     'room_id' => 'A101',
-                    'bill_status_id' => 'BS002',
+                    'bill_status_id' => 'BS001',
                     'total_payment' => '4907',
                     'unit_price_water_id' => 'UW',
                     'water_price' => '85',
@@ -34,7 +34,7 @@ class AddFlidsDataBill extends Migration
                 [
                     'bill_id' => '171020_A101',
                     'room_id' => 'A101',
-                    'bill_status_id' => 'BS003',
+                    'bill_status_id' => 'BS001',
                     'total_payment' => '4895',
                     'unit_price_water_id' => 'UW',
                     'water_price' => '85',
